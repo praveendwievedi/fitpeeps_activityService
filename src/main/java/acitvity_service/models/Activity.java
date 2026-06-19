@@ -13,12 +13,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@Table(name = "activities")
 public class Activity {
 //    private UUID activityId;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String  userId;
+    private Long  userId;
 
     @Column(nullable = false)
     private LocalDateTime startTime;
