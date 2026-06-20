@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/users/{id}/activity")
+@RequestMapping("/activity")
 @RequiredArgsConstructor
 public class ActivityController {
     private final ActivityServices activityServices;
     private final UserDetails userDetails;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> createActivity(@PathVariable Long id, @RequestBody ActivityRequest request){
+    @PostMapping("/user/{userId}/register")
+    public ResponseEntity<?> createActivity(@PathVariable Long userId, @RequestBody ActivityRequest request){
 //        if(!userDetails.findUser())return new ResponseEntity<>("No users Found",HttpStatus.OK);
-        ActivityResponse activity=activityServices.createAcitvity(request,id);
+        ActivityResponse activity=activityServices.createAcitvity(request,userId);
 
         return new ResponseEntity<>(activity, HttpStatus.OK);
     }
 
     @GetMapping("/{activityId}")
-    public ResponseEntity<?> findActivity(@PathVariable Long id,@PathVariable Long activityId){
-        Optional<ActivityResponse> foundActivity=activityServices.findActivity(id,activityId);
+    public ResponseEntity<?> findActivity(@PathVariable Long userId,@PathVariable Long activityId){
+        Optional<ActivityResponse> foundActivity=activityServices.findActivity(userId,activityId);
 
         if(foundActivity.isEmpty())return new ResponseEntity<>("No such acitvity Found",HttpStatus.OK);
         return new ResponseEntity<>(foundActivity,HttpStatus.OK);

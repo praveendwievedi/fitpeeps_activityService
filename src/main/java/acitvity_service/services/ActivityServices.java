@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,5 +36,12 @@ public class ActivityServices {
 
     public Optional<Activity> checkActivity(Long activityId){
         return activityRepo.findById(activityId);
+    }
+
+    public List<ActivityResponse> getAllActivityForUsers(Long userId){
+        return activityRepo.findAllActivitiesByUserId(userId).stream()
+                .map(
+                        activity -> new ActivityResponse(activity.getId(), activity.getUserId(), activity.getStartTime(),activity.getEndTime())
+                ).toList();
     }
 }
