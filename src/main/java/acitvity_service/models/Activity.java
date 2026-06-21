@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,8 +21,11 @@ public class Activity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String activityType;
     private Long  userId;
+    private Long duration;
 
+    private LocalDate activityDate;
     @Column(nullable = false)
     private LocalDateTime startTime;
     @Column(nullable = false)
@@ -35,6 +40,8 @@ public class Activity {
     protected void onCreate(){
         this.createdAt=LocalDateTime.now();
         this.updatedAt=LocalDateTime.now();
+        this.activityDate=LocalDate.now();
+        this.duration= Duration.between(startTime,endTime).toMinutes();
     }
     @PreUpdate
     protected void onUpdate(){

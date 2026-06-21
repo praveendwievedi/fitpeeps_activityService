@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -25,5 +26,11 @@ public class ActivityResponseController {
         List<ActivityResponse> acitvities=activityServices.getAllActivityForUsers(userId);
         ActivitiesList userActivities=new ActivitiesList(userId,acitvities);
         return new ResponseEntity<>(userActivities, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{userId}/{Date}")
+    public ResponseEntity<?> getAllActivitiesForTheDate(@PathVariable Long userId, @PathVariable LocalDate Date){
+
+        return new ResponseEntity<>("",HttpStatus.OK);
     }
 }
