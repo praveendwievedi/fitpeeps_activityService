@@ -27,7 +27,7 @@ public class ActivityController {
         return new ResponseEntity<>(activity, HttpStatus.OK);
     }
 
-    @GetMapping("/{activityId}")
+    @GetMapping("/{activityId}/user/{userId}")
     public ResponseEntity<?> findActivity(@PathVariable Long userId,@PathVariable Long activityId){
         Optional<ActivityResponse> foundActivity=activityServices.findActivity(userId,activityId);
 
